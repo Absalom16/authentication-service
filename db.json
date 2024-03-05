@@ -1,0 +1,17 @@
+{
+  "users": [
+    {
+      "id": "50e1",
+      "username": "john_doe",
+      "email": "john@example.com",
+      "password": "password123"
+    },
+    {
+      "id": "ead6",
+      "username": "absalom",
+      "email": "absalomlihasi@gmail.com",
+      "secretKey": "lmROAFnx",
+      "password": ""
+    }
+  ]
+}
