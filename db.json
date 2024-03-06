@@ -1,17 +1,67 @@
 {
   "users": [
     {
-      "id": "50e1",
-      "username": "john_doe",
-      "email": "john@example.com",
-      "password": "password123"
-    },
-    {
       "id": "ead6",
       "username": "absalom",
       "email": "absalomlihasi@gmail.com",
       "secretKey": "lmROAFnx",
       "password": ""
+    },
+    {
+      "id": "ca18",
+      "username": "betcy",
+      "email": "betcy@gmail.com",
+      "secretKey": "V9stxye2",
+      "password": "k¦¨"
+    },
+    {
+      "id": "749b",
+      "username": "fortune",
+      "email": "fortune@gmail.com",
+      "secretKey": "eLQMOvxu",
+      "password": "~"
+    },
+    {
+      "id": "11ff",
+      "username": "morrell",
+      "email": "morell@gmail.com",
+      "secretKey": "3AuxaYxY",
+      "password": "ds¨¬"
+    },
+    {
+      "id": "ce79",
+      "username": "jayden",
+      "email": "jayden@gmail.com",
+      "secretKey": "IthXzngZ",
+      "password": "z¦"
+    },
+    {
+      "id": "cb3d",
+      "username": "bob",
+      "email": "bob@gmail.com",
+      "secretKey": "2lRVJXF8",
+      "password": "c"
+    },
+    {
+      "id": "6b2b",
+      "username": "emmah",
+      "email": "emmah@gmail.com",
+      "secretKey": "x6beKQwP",
+      "password": "©h"
+    },
+    {
+      "id": "74b0",
+      "username": "del",
+      "email": "del@gmail.com",
+      "secretKey": "ztYkqGae",
+      "password": "«¦¦}³¤¤{±¬"
+    },
+    {
+      "id": "2f67",
+      "username": "tess",
+      "email": "tess@gmail.com",
+      "secretKey": "4ehUICVJ",
+      "password": "e"
     }
   ]
 }

@@ -1,54 +1,107 @@
 import axios from "axios";
-import readline from "readline";
+import inquirer from "inquirer";
 import { reverseMapPassword } from "./utilities/decrypt.js";
 
-const rl = readline.createInterface({
-  input: process.stdin,
-  output: process.stdout,
-});
-
-// Function to request username, email, and password
-function requestUserData(callback) {
-  const userData = {};
-
-  rl.question("Enter your email: ", (email) => {
-    userData.email = email;
-
-    rl.question("Enter your password: ", (password) => {
-      userData.password = password;
-
-      // Pass the collected user data to the callback function
-      callback(userData);
+// Function to handle user login
+export function login() {
+  // Prompt the user for their email using inquirer
+  inquirer
+    .prompt([
+      {
+        type: "input",
+        name: "email",
+        message: "Enter your email:",
+        validate: function (value) {
+          if (value.trim() === "") {
+            return "Email cannot be empty.";
+          }
+          return true;
+        },
+      },
+    ])
+    .then(async (answers) => {
+      // Handle user input
+      try {
+        // Get user data based on the provided email
+        const userData = await getUser(answers.email);
+        if (userData) {
+          // Check if user data exists
+          // Prompt the user for their password using inquirer
+          inquirer
+            .prompt([
+              {
+                type: "password",
+                name: "password",
+                message: "Enter your password:",
+                validate: function (value) {
+                  if (value.trim() === "") {
+                    return "Password cannot be empty.";
+                  }
+                  return true;
+                },
+              },
+            ])
+            .then(async (answers) => {
+              // Handle user input
+              // Authenticate the user with the provided password
+              const isValid = await authenticateUser(
+                userData,
+                answers.password
+              );
+              // Notify the user of the authentication result
+              if (isValid) {
+                console.log("Successful authentication");
+              } else {
+                console.log("Failed authentication");
+              }
+            });
+        } else {
+          // Notify the user that the user with the provided email was not found
+          console.log("User not found");
+        }
+      } catch (error) {
+        // Handle errors
+        // Log an error message if an error occurs during user login
+        console.error("Error:", error);
+      }
     });
-  });
 }
 
-// Start by requesting user data
-requestUserData(getUser);
-
-async function getUser(userData) {
+// Function to get user data based on email
+async function getUser(email) {
   try {
-    const email = userData.email;
-    const password = userData.password;
+    // Make a GET request to retrieve user data from the server based on the provided email
     const response = await axios.get("http://localhost:3000/users", {
       params: {
         email: email,
       },
     });
+    // Return the first user data object from the response
+    return response.data[0];
+  } catch (error) {
+    // Handle errors
+    // Log an error message if an error occurs while fetching user data
+    console.error("Error getting user:", error);
+    // Return null to indicate that no user data was found
+    return null;
+  }
+}
 
-    const encryptedPassword = response.data[0].password;
-    const secretKey = response.data[0].secretKey;
-
+// Function to authenticate the user with the provided password
+async function authenticateUser(userData, password) {
+  try {
+    // Decrypt the encrypted password stored in the user data
+    const encryptedPassword = userData.password;
+    const secretKey = userData.secretKey;
     const originalPassword = reverseMapPassword(encryptedPassword, secretKey);
 
-    if (password == originalPassword) {
-      //successfull login
-      console.log("successfull authentication");
-    } else {
-      //unsuccessful authentication
-      console.log("failed authentication");
-    }
+    // Compare the provided password with the decrypted original password
+    return password === originalPassword;
   } catch (error) {
-    console.error("Error getting users:", error);
+    // Handle errors
+    // Log an error message if an error occurs during user authentication
+    console.error("Error authenticating user:", error);
+    // Return false to indicate authentication failure
+    return false;
   }
 }
