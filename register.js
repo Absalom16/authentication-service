@@ -1,22 +1,23 @@
 import axios from "axios";
 import inquirer from "inquirer";
 import {
-  generateSecretKey,
-  mapPasswordToSecretKey,
-} from "./utilities/encrypt.js";
+  generateRandomSalt,
+  combinePasswordWithSalt,
+  generateHash,
+} from "./utilities/helpers.js";
 
 // Function to register a new user
 export function register() {
-  // Prompt the user for username, email, and password using inquirer
+  // Prompt the user for name, email, and password using inquirer
   inquirer
     .prompt([
       {
         type: "input",
-        name: "username",
-        message: "Enter your username:",
+        name: "name",
+        message: "Enter your name:",
         validate: function (value) {
           if (value.trim() === "") {
-            return "Username cannot be empty.";
+            return "Name cannot be empty.";
           }
           return true;
         },
@@ -49,7 +50,7 @@ export function register() {
       try {
         // Check if any input fields are empty
         if (
-          answers.username.trim() === "" ||
+          answers.name.trim() === "" ||
           answers.email.trim() === "" ||
           answers.password.trim() === ""
         ) {
@@ -64,24 +65,23 @@ export function register() {
           return; // Exit the registration process
         }
 
-        // Generate a secret key for encryption
-        const secretKey = generateSecretKey(8);
-        // Encrypt the user's password using the generated secret key
-        const encryptedPassword = mapPasswordToSecretKey(
-          answers.password,
-          secretKey
-        );
+        // Generate a salt
+        const salt = generateRandomSalt();
+        // Combine salt with password
+        const combinedString = combinePasswordWithSalt(answers.password, salt);
+        //generate hashed password
+        const hashedPassword = generateHash(combinedString);
 
         // Create an object containing the user's data along with the encrypted password
-        const encryptedData = {
-          username: answers.username,
+        const userData = {
+          name: answers.name,
           email: answers.email,
-          secretKey,
-          password: encryptedPassword,
+          salt,
+          password: hashedPassword,
         };
 
         // Add the user by making a POST request to the server
-        const response = await addUser(encryptedData);
+        const response = await addUser(userData);
         // Log a success message if the user was added successfully
         console.log("User added successfully:", response.data);
       } catch (error) {

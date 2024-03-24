@@ -1,6 +1,6 @@
 import axios from "axios";
 import inquirer from "inquirer";
-import { reverseMapPassword } from "./utilities/decrypt.js";
+import { combinePasswordWithSalt, generateHash } from "./utilities/helpers.js";
 
 // Function to handle user login
 export function login() {
@@ -90,13 +90,13 @@ async function getUser(email) {
 // Function to authenticate the user with the provided password
 async function authenticateUser(userData, password) {
   try {
-    // Decrypt the encrypted password stored in the user data
-    const encryptedPassword = userData.password;
-    const secretKey = userData.secretKey;
-    const originalPassword = reverseMapPassword(encryptedPassword, secretKey);
+    const hashedPassword = userData.password;
+    const salt = userData.salt;
 
-    // Compare the provided password with the decrypted original password
-    return password === originalPassword;
+    const combinedString = combinePasswordWithSalt(password, salt);
+    const hashedString = generateHash(combinedString);
+
+    return hashedString === hashedPassword;
   } catch (error) {
     // Handle errors
     // Log an error message if an error occurs during user authentication
