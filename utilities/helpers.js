@@ -26,3 +26,4 @@ export function generateHash(combinedString) {
   hash.update(combinedString);
   return hash.digest("hex");
 }
+
