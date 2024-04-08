@@ -13,6 +13,13 @@
       "email": "test@gmail.com",
       "salt": "KXoc3MBe'?!]]>|'",
       "password": "-f72efd7270878c45f739e597e7b74426b4e11813472dab54d0bb70c2d909250"
+    },
+    {
+      "id": "c063",
+      "name": "morell",
+      "email": "morell@gmail.com",
+      "salt": "t/m|IJ{ggR#uP{6]",
+      "password": "116616a469dbfce42360f7c2-1b9c2781a3427b22e73e03e725d57c84b4d6c73"
     }
   ]
 }

@@ -21,6 +21,7 @@ export function combinePasswordWithSalt(password, salt) {
 //function to generate hash
 export function generateHash(input) {
   // Constants for SHA-256
+  // represented as 32-bit hexadecimal numbers
   const K = [
     0x428a2f98, 0x71374491, 0xb5c0fbcf, 0xe9b5dba5, 0x3956c25b, 0x59f111f1,
     0x923f82a4, 0xab1c5ed5, 0xd807aa98, 0x12835b01, 0x243185be, 0x550c7dc3,
