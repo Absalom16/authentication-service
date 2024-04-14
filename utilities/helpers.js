@@ -1,4 +1,5 @@
 import axios from "axios";
+const url = "http://localhost:3000/users";
 //1.
 // function to generate salt
 export function generateRandomSalt(length = 16) {
@@ -139,7 +140,7 @@ export function generateHash(input) {
 export async function checkEmailExists(email) {
   try {
     // Make a GET request to check if the email exists in the user database
-    const response = await axios.get("http://localhost:3000/users", {
+    const response = await axios.get(url, {
       params: {
         email: email,
       },
@@ -159,7 +160,7 @@ export async function checkEmailExists(email) {
 export async function addUser(userData) {
   try {
     // Make a POST request to the server to add the user
-    const response = await axios.post("http://localhost:3000/users", userData);
+    const response = await axios.post(url, userData);
     // Return the response
     return response;
   } catch (error) {
@@ -173,7 +174,7 @@ export async function addUser(userData) {
 export async function getUser(email) {
   try {
     // Make a GET request to retrieve user data from the server based on the provided email
-    const response = await axios.get("http://localhost:3000/users", {
+    const response = await axios.get(url, {
       params: {
         email: email,
       },

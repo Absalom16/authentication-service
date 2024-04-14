@@ -28,7 +28,10 @@ app.post("/register", async (req, res) => {
 
     const emailExists = await checkEmailExists(email);
     if (emailExists) {
-      res.send({ message: "Email already exists. Try another one" });
+      res.send({
+        message: "Email already exists. Try another one",
+        status: 200,
+      });
       return;
     }
 
@@ -52,7 +55,11 @@ app.post("/register", async (req, res) => {
     // Add the user by making a POST request to the server
     const response = await addUser(userData);
     // Log a success message if the user was added successfully
-    res.send({ message: "User added successfully:", data: response.data });
+    res.send({
+      message: "User added successfully:",
+      data: response.data,
+      status: 200,
+    });
     return;
   } catch (e) {
     console.log(e);
@@ -72,13 +79,13 @@ app.post("/login", async (req, res) => {
       const isValid = await authenticateUser(userData, password);
       // Notify the user of the authentication result
       if (isValid) {
-        res.send({ message: "Successful authentication" });
+        res.send({ message: "Successful authentication", status: 200 });
       } else {
-        res.send({ message: "Failed authentication" });
+        res.send({ message: "Failed authentication", status: 200 });
       }
     } else {
       // Notify the user that the user with the provided email was not found
-      res.send({ message: "User not found" });
+      res.send({ message: "User not found", status: 200 });
       return;
     }
   } catch (e) {
