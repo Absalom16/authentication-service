@@ -1,6 +1,6 @@
 import axios from "axios";
 import inquirer from "inquirer";
-import { combinePasswordWithSalt, generateHash } from "./utilities/helpers.js";
+import { combinePasswordWithSalt, generateHash, authenticateUser } from "./utilities/helpers.js";
 
 // Function to handle user login
 export function login() {
@@ -87,22 +87,5 @@ async function getUser(email) {
   }
 }
 
-// Function to authenticate the user with the provided password
-async function authenticateUser(userData, password) {
-  try {
-    const hashedPassword = userData.password;
-    const salt = userData.salt;
 
-    const combinedString = combinePasswordWithSalt(password, salt);
-    const hashedString = generateHash(combinedString);
-
-    return hashedString === hashedPassword;
-  } catch (error) {
-    // Handle errors
-    // Log an error message if an error occurs during user authentication
-    console.error("Error authenticating user:", error);
-    // Return false to indicate authentication failure
-    return false;
-  }
-}
 

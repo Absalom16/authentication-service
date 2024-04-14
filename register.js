@@ -4,6 +4,7 @@ import {
   generateRandomSalt,
   combinePasswordWithSalt,
   generateHash,
+  addUser,
 } from "./utilities/helpers.js";
 
 // Function to register a new user
@@ -111,18 +112,3 @@ async function checkEmailExists(email) {
     return false;
   }
 }
-
-// Function to add a user by making a POST request to the server
-async function addUser(userData) {
-  try {
-    // Make a POST request to the server to add the user
-    const response = await axios.post("http://localhost:3000/users", userData);
-    // Return the response
-    return response;
-  } catch (error) {
-    // Handle errors
-    // Throw an error if the POST request fails
-    throw error;
-  }
-}
-

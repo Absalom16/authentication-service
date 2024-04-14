@@ -133,3 +133,36 @@ export function generateHash(input) {
   }
   return hash;
 }
+
+// Function to add a user by making a POST request to the server
+export async function addUser(userData) {
+  try {
+    // Make a POST request to the server to add the user
+    const response = await axios.post("http://localhost:3000/users", userData);
+    // Return the response
+    return response;
+  } catch (error) {
+    // Handle errors
+    // Throw an error if the POST request fails
+    throw error;
+  }
+}
+
+// Function to authenticate the user with the provided password
+export async function authenticateUser(userData, password) {
+  try {
+    const hashedPassword = userData.password;
+    const salt = userData.salt;
+
+    const combinedString = combinePasswordWithSalt(password, salt);
+    const hashedString = generateHash(combinedString);
+
+    return hashedString === hashedPassword;
+  } catch (error) {
+    // Handle errors
+    // Log an error message if an error occurs during user authentication
+    console.error("Error authenticating user:", error);
+    // Return false to indicate authentication failure
+    return false;
+  }
+}
