@@ -20,6 +20,13 @@
       "email": "morell@gmail.com",
       "salt": "t/m|IJ{ggR#uP{6]",
       "password": "116616a469dbfce42360f7c2-1b9c2781a3427b22e73e03e725d57c84b4d6c73"
+    },
+    {
+      "id": "6de3",
+      "name": "june",
+      "email": "june@gmail.com",
+      "salt": "3lee}G<JpDeL9r)%",
+      "password": "1d437437552efd81410e41016f6dd3cf281581a81f60283c2ad374297d26cef6"
     }
   ]
 }

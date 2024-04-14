@@ -1,3 +1,4 @@
+import axios from "axios";
 //1.
 // function to generate salt
 export function generateRandomSalt(length = 16) {
@@ -134,6 +135,26 @@ export function generateHash(input) {
   return hash;
 }
 
+// Function to check if an email already exists
+export async function checkEmailExists(email) {
+  try {
+    // Make a GET request to check if the email exists in the user database
+    const response = await axios.get("http://localhost:3000/users", {
+      params: {
+        email: email,
+      },
+    });
+    // Return true if the email exists, false otherwise
+    return response.data.length > 0;
+  } catch (error) {
+    // Handle errors
+    // Log an error message if an error occurs while checking email existence
+    console.error("Error checking email existence:", error);
+    // Return false to indicate email existence cannot be determined
+    return false;
+  }
+}
+
 // Function to add a user by making a POST request to the server
 export async function addUser(userData) {
   try {
@@ -145,6 +166,26 @@ export async function addUser(userData) {
     // Handle errors
     // Throw an error if the POST request fails
     throw error;
+  }
+}
+
+// Function to get user data based on email
+export async function getUser(email) {
+  try {
+    // Make a GET request to retrieve user data from the server based on the provided email
+    const response = await axios.get("http://localhost:3000/users", {
+      params: {
+        email: email,
+      },
+    });
+    // Return the first user data object from the response
+    return response.data[0];
+  } catch (error) {
+    // Handle errors
+    // Log an error message if an error occurs while fetching user data
+    console.error("Error getting user:", error);
+    // Return null to indicate that no user data was found
+    return null;
   }
 }
 

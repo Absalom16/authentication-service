@@ -1,6 +1,6 @@
 import axios from "axios";
 import inquirer from "inquirer";
-import { combinePasswordWithSalt, generateHash, authenticateUser } from "./utilities/helpers.js";
+import { combinePasswordWithSalt, generateHash, authenticateUser, getUser } from "./utilities/helpers.js";
 
 // Function to handle user login
 export function login() {
@@ -67,25 +67,6 @@ export function login() {
     });
 }
 
-// Function to get user data based on email
-async function getUser(email) {
-  try {
-    // Make a GET request to retrieve user data from the server based on the provided email
-    const response = await axios.get("http://localhost:3000/users", {
-      params: {
-        email: email,
-      },
-    });
-    // Return the first user data object from the response
-    return response.data[0];
-  } catch (error) {
-    // Handle errors
-    // Log an error message if an error occurs while fetching user data
-    console.error("Error getting user:", error);
-    // Return null to indicate that no user data was found
-    return null;
-  }
-}
 
 
 
