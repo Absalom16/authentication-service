@@ -28,9 +28,8 @@ app.post("/register", async (req, res) => {
 
     const emailExists = await checkEmailExists(email);
     if (emailExists) {
-      res.send({
+      res.status(409).json({
         message: "Email already exists. Try another one",
-        status: 200,
       });
       return;
     }
@@ -55,13 +54,16 @@ app.post("/register", async (req, res) => {
     // Add the user by making a POST request to the server
     const response = await addUser(userData);
     // Log a success message if the user was added successfully
-    res.send({
-      message: "User added successfully:",
+    res.status(200).json({
+      message: "User added successfully",
       data: response.data,
-      status: 200,
     });
     return;
   } catch (e) {
+    res.status(500).json({
+      message: e.message,
+    });
+
     console.log(e);
   }
 });
@@ -79,16 +81,66 @@ app.post("/login", async (req, res) => {
       const isValid = await authenticateUser(userData, password);
       // Notify the user of the authentication result
       if (isValid) {
-        res.send({ message: "Successful authentication", status: 200 });
+        res.status(200).json({ message: "Successful authentication" });
       } else {
-        res.send({ message: "Failed authentication", status: 200 });
+        res.status(401).json({ message: "Failed authentication" });
       }
     } else {
       // Notify the user that the user with the provided email was not found
-      res.send({ message: "User not found", status: 200 });
+      res.status(404).json({ message: "User not found" });
       return;
     }
   } catch (e) {
+    res.status(500).json({
+      message: e.message,
+    });
+
+    console.log(e);
+  }
+});
+
+app.post("/demo", async (req, res) => {
+  try {
+    const { action } = req.body;
+
+    // Create an object containing the user's data along with the encrypted password
+    // const userData = {
+    //   name: name,
+    //   email: email,
+    //   salt,
+    //   password: hashedPassword,
+    // };
+
+    if (action === "generateSalt") {
+      //generate salt
+      const salt = generateRandomSalt();
+      res.status(200).json({
+        message: salt,
+      });
+    } else if (action === "generateHash") {
+      const { combinedString } = req.body;
+      //generate hashed password
+      const hashedPassword = generateHash(combinedString);
+
+      res.status(200).json({
+        message: hashedPassword,
+      });
+    } else if (action === "save") {
+      const { userData } = req.body;
+      // Add the user by making a POST request to the server
+      const response = await addUser(userData);
+      // Log a success message if the user was added successfully
+      res.status(200).json({
+        message: response.data,
+      });
+    }
+
+    return;
+  } catch (e) {
+    res.status(500).json({
+      message: e.message,
+    });
+
     console.log(e);
   }
 });

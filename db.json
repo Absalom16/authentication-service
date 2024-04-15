@@ -27,6 +27,27 @@
       "email": "june@gmail.com",
       "salt": "3lee}G<JpDeL9r)%",
       "password": "1d437437552efd81410e41016f6dd3cf281581a81f60283c2ad374297d26cef6"
+    },
+    {
+      "id": "f0ca",
+      "name": "frank",
+      "email": "frank@gmail.com",
+      "salt": "N55n0gLY>t/p8&2s",
+      "password": "284cb9bd68fd457d52b26aa168d5cf0f0cd2768061d8abfa1d9315a04d56bc04"
+    },
+    {
+      "id": "796a",
+      "name": "michael",
+      "email": "michael@gmail.com",
+      "salt": "gdlNfRNYlgb/fx2=",
+      "password": "4d9228702337367272e619fd2108b0f23f0a4c2c6d9ad08664b737a45938c9ba"
+    },
+    {
+      "id": "445f",
+      "name": "julie",
+      "email": "julie@gmail.com",
+      "salt": "3({-m4L>#lNRo~Rl",
+      "password": "69924e5f62bce5bf-4523b0802cbee87477f5c9e21316a645170aa303e5db6c2"
     }
   ]
 }
