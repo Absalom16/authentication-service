@@ -71,7 +71,9 @@ app.post("/register", async (req, res) => {
 // Add a new user
 app.post("/login", async (req, res) => {
   try {
-    const { email, password } = req.body;
+    const { email, password, callbackUrl } = req.body;
+
+    console.log(callbackUrl)
 
     // Get user data based on the provided email
     const userData = await getUser(email);

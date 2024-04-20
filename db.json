@@ -48,6 +48,20 @@
       "email": "julie@gmail.com",
       "salt": "3({-m4L>#lNRo~Rl",
       "password": "69924e5f62bce5bf-4523b0802cbee87477f5c9e21316a645170aa303e5db6c2"
+    },
+    {
+      "id": "5836",
+      "name": "milly",
+      "email": "milly@gmail.com",
+      "salt": "^w#m8#^T]E_O_Z=)",
+      "password": "18ae3bf1212a13ca4851ccbc76a14e1b6ea3291d337a2ba54c3c13493840c2c9"
+    },
+    {
+      "id": "bb8c",
+      "name": "robert",
+      "email": "robert@gmail.com",
+      "salt": "[K6Eu0u$h{3MZJIx",
+      "password": "45743f814c8a2ce1013d62951098060057ebc5de-860446e105794154a330045"
     }
   ]
 }
