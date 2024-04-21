@@ -62,6 +62,27 @@
       "email": "robert@gmail.com",
       "salt": "[K6Eu0u$h{3MZJIx",
       "password": "45743f814c8a2ce1013d62951098060057ebc5de-860446e105794154a330045"
+    },
+    {
+      "id": "cc83",
+      "name": "job",
+      "email": "job@gmail.com",
+      "salt": "(hZg0^UcEQmv^zh5",
+      "password": "71730018231f2ed9254ac7bb3d177fd10499b7c30f0094b661675efd60f76ad4"
+    },
+    {
+      "id": "f3fe",
+      "name": "mikel",
+      "email": "mikel@gmail.com",
+      "salt": "S>/e#GwxfbKYskV9",
+      "password": "13b323ac-f600ab9072ac4ce44ca3999-65c7eb67ebc90e6638ed70c-a954677"
+    },
+    {
+      "id": "cb3d",
+      "name": "isaac",
+      "email": "isaac@gmail.com",
+      "salt": "aw[K1-RMO78/QKdA",
+      "password": "4b4ce38c-8ab70a0397444b0476e68bf351f74d879d5ab9727733a28-3f9d146"
     }
   ]
 }

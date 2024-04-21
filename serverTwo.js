@@ -8,7 +8,7 @@ import {
   generateHash,
   generateRandomSalt,
   getUser,
-} from "./utilities/helpers.js";
+} from "./utilities/helpersTwo.js";
 const app = express();
 dotenv.config();
 const PORT = process.env.PORT;

@@ -1,29 +1,5 @@
 import axios from "axios";
-import { MongoClient, ServerApiVersion } from "mongodb";
-import dotenv from "dotenv";
-
-dotenv.config();
-
-// MongoDB connection
-const uri = process.env.URI;
-const client = new MongoClient(uri, {
-  serverApi: {
-    version: ServerApiVersion.v1,
-    strict: true,
-    deprecationErrors: true,
-  },
-});
-const db = client.db(process.env.DB);
-
-client
-  .connect()
-  .then(() => {
-    console.log("Connected to MongoDB");
-  })
-  .catch((err) => {
-    console.error("Error connecting to MongoDB:", err);
-  });
-
+const url = "http://localhost:3000/users";
 //1.
 // function to generate salt
 export function generateRandomSalt(length = 16) {
@@ -164,11 +140,13 @@ export function generateHash(input) {
 export async function checkEmailExists(email) {
   try {
     // Make a GET request to check if the email exists in the user database
-    const response = await db.collection("users").find().toArray();
-    const users = response.filter((user) => user.email == email);
-
+    const response = await axios.get(url, {
+      params: {
+        email: email,
+      },
+    });
     // Return true if the email exists, false otherwise
-    return users.length > 0;
+    return response.data.length > 0;
   } catch (error) {
     // Handle errors
     // Log an error message if an error occurs while checking email existence
@@ -182,11 +160,9 @@ export async function checkEmailExists(email) {
 export async function addUser(userData) {
   try {
     // Make a POST request to the server to add the user
-    const newUser = userData;
-    const result = await db.collection("users").insertOne(newUser);
-
+    const response = await axios.post(url, userData);
     // Return the response
-    return result;
+    return response;
   } catch (error) {
     // Handle errors
     // Throw an error if the POST request fails
@@ -198,12 +174,13 @@ export async function addUser(userData) {
 export async function getUser(email) {
   try {
     // Make a GET request to retrieve user data from the server based on the provided email
-
-    const response = await db.collection("users").find().toArray();
-    const users = response.filter((user) => user.email == email);
-
+    const response = await axios.get(url, {
+      params: {
+        email: email,
+      },
+    });
     // Return the first user data object from the response
-    return users[0];
+    return response.data[0];
   } catch (error) {
     // Handle errors
     // Log an error message if an error occurs while fetching user data
